@@ -2895,7 +2895,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _temp2;
+var _class, _temp;
 
 var _react = __webpack_require__(0);
 
@@ -2915,29 +2915,80 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ColorPickerEditor = (_temp2 = _class = function (_PureComponent) {
+var VisibleColorPickerComponent = {
+  height: "100%",
+  display: "block"
+};
+
+var InvisibleColorPickerComponent = {
+  height: 0,
+  display: "none"
+};
+
+var ColorPickerEditor = (_temp = _class = function (_PureComponent) {
   _inherits(ColorPickerEditor, _PureComponent);
 
-  function ColorPickerEditor() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function ColorPickerEditor(props) {
     _classCallCheck(this, ColorPickerEditor);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (ColorPickerEditor.__proto__ || Object.getPrototypeOf(ColorPickerEditor)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ColorPickerEditor.__proto__ || Object.getPrototypeOf(ColorPickerEditor)).call.apply(_ref, [this].concat(args))), _this), _this.handleChangeColor = function (newColor) {
+    _this.handleChangeColor = function (newColor) {
       _this.props.commit(newColor.hex);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+      _this.setState({
+        selectedColor: newColor.hex
+      });
+    };
+
+    _this.state = {
+      selectedColor: props.value ? props.value : "#323232",
+      colorPickerStyles: InvisibleColorPickerComponent
+    };
+    _this.width = "268";
+
+    _this.handleChangeColor = _this.handleChangeColor.bind(_this);
+    _this.onFocus = _this.onFocus.bind(_this);
+    _this.onBlur = _this.onBlur.bind(_this);
+    return _this;
   }
 
   _createClass(ColorPickerEditor, [{
+    key: "onBlur",
+    value: function onBlur() {
+      this.setState({
+        colorPickerStyles: InvisibleColorPickerComponent
+      });
+    }
+  }, {
+    key: "onFocus",
+    value: function onFocus() {
+      this.setState({
+        colorPickerStyles: VisibleColorPickerComponent
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement(_reactColor.SketchPicker, { color: this.props.value, onChange: this.handleChangeColor });
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "div",
+          { style: { display: "flex", alignItems: "center", marginBottom: 5 } },
+          _react2.default.createElement("div", { style: { padding: "5px", height: "30px", width: "54%", backgroundColor: this.state.selectedColor } }),
+          _react2.default.createElement("input", { type: 'text',
+            value: this.state.selectedColor,
+            style: { width: "46%" },
+            onBlur: this.onBlur,
+            onFocus: this.onFocus
+          })
+        ),
+        _react2.default.createElement(
+          "div",
+          { style: this.state.colorPickerStyles },
+          _react2.default.createElement(_reactColor.HuePicker, { color: this.props.value, width: this.width, onChange: this.handleChangeColor })
+        )
+      );
     }
   }]);
 
@@ -2945,7 +2996,7 @@ var ColorPickerEditor = (_temp2 = _class = function (_PureComponent) {
 }(_react.PureComponent), _class.propTypes = {
   value: _propTypes2.default.string,
   commit: _propTypes2.default.func.isRequired
-}, _temp2);
+}, _temp);
 exports.default = ColorPickerEditor;
 
 /***/ }),
