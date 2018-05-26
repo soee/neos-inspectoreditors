@@ -1,0 +1,39 @@
+{
+  "name": "soee/inspectoreditors",
+  "type": "neos-package",
+  "description": "Provides custom inspector editors for Neos CMS.",
+  "license": "GPL-3.0+",
+  "keywords": [
+    "soee",
+    "flow",
+    "neos",
+    "custom",
+    "inspector",
+    "editor",
+    "javascript",
+    "react",
+    "extend",
+    "colorpicker"
+  ],
+  "authors": [
+    {
+      "name": "Marcin Sągol",
+      "email": "marcin@soee.pl",
+      "homepage": "https://soee.pl",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "neos/flow": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Soee\\InspectorEditors\\": "Classes/"
+    }
+  },
+  "extra": {
+    "neos": {
+      "package-key": "Soee.InspectorEditors"
+    }
+  }
+}

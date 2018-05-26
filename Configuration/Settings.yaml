@@ -1,0 +1,7 @@
+Neos:
+  Neos:
+    Ui:
+      resources:
+        javascript:
+          'Soee.InspectorEditors:ColorPickerEditor':
+            resource: resource://Soee.InspectorEditors/Public/ColorPickerEditor/Plugin.js
