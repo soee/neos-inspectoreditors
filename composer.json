@@ -1,6 +1,6 @@
 {
   "name": "soee/inspectoreditors",
-  "type": "neos-package",
+  "type": "neos-plugin",
   "description": "Provides custom inspector editors for Neos CMS.",
   "license": "GPL-3.0+",
   "keywords": [
